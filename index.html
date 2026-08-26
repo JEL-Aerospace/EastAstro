@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>East Astro | Lincoln East Astronomy Club</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0e17;
+      color: #e8ecf1;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 48px;
+    }
+    nav .logo { font-weight: 700; letter-spacing: 1px; }
+    nav a {
+      color: #e8ecf1;
+      text-decoration: none;
+      margin-left: 32px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    nav a:hover { opacity: 1; }
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      background: linear-gradient(180deg, #ffffff 0%, #8ea0c4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero p {
+      margin-top: 16px;
+      font-size: 1.1rem;
+      color: #9aa5b8;
+      max-width: 480px;
+    }
+    .hero .cta {
+      margin-top: 32px;
+      padding: 14px 32px;
+      background: #e8ecf1;
+      color: #0a0e17;
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    footer {
+      text-align: center;
+      padding: 32px;
+      color: #5a6478;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">EAST ASTRO</div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#join">Join</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Lincoln East<br>Astronomy Club</h1>
+    <p>Spartans looking up. Star parties, meetings, and events for anyone curious about what's out there.</p>
+    <a href="#join" class="cta">Join the Club</a>
+  </section>
+
+  <footer>
+    &copy; 2026 East Astro — Lincoln East High School
+  </footer>
+</body>
+</html>
