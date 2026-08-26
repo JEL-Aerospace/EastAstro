@@ -1,122 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>East Astro | Lincoln East Astronomy Club</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #0a0e17;
-      color: #e8ecf1;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 48px;
-    }
-    nav .logo { font-weight: 700; letter-spacing: 1px; }
-    nav a {
-      color: #e8ecf1;
-      text-decoration: none;
-      margin-left: 32px;
-      font-size: 14px;
-      opacity: 0.8;
-    }
-    nav a:hover { opacity: 1; }
-    .hero {
-      min-height: 80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 24px;
-    }
-    .hero h1 {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      font-weight: 800;
-      letter-spacing: -2px;
-      background: linear-gradient(180deg, #ffffff 0%, #8ea0c4 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .hero p {
-      margin-top: 16px;
-      font-size: 1.1rem;
-      color: #9aa5b8;
-      max-width: 480px;
-    }
-    .hero .cta {
-      margin-top: 32px;
-      padding: 14px 32px;
-      background: #e8ecf1;
-      color: #0a0e17;
-      border-radius: 100px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    footer {
-      text-align: center;
-      padding: 32px;
-      color: #5a6478;
-      font-size: 13px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEAC | Lincoln East Astronomy Club</title>
+<style>
+  :root {
+    --navy: #0f1420;
+    --navy-dark: #090c14;
+    --navy-light: #161c2c;
+    --border: rgba(255,255,255,0.07);
+    --text-light: #edeef2;
+    --text-muted: #7b8497;
+    --star: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: #050710;
+    color: var(--text-light);
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(5, 7, 16, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--text-light);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover { color: var(--text-light); }
+  .donate-btn {
+    background: var(--text-light);
+    color: #050710 !important;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+  }
+  .donate-btn:hover { opacity: 0.85; color: #050710 !important; }
+
+  /* ---- HERO with generated galaxy/starfield ---- */
+  .hero {
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(90, 110, 200, 0.14), transparent 65%),
+      radial-gradient(ellipse 50% 35% at 20% 100%, rgba(70, 90, 170, 0.08), transparent 60%),
+      linear-gradient(180deg, #050710 0%, #060811 50%, #050710 100%);
+  }
+  .hero canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    max-width: 800px;
+  }
+  .hero .subtitle {
+    margin-top: 20px;
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    color: var(--text-muted);
+    max-width: 560px;
+    line-height: 1.6;
+  }
+
+  /* ---- SECTIONS ---- */
+  section.content {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 90px 24px;
+  }
+  section.content h2 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 36px;
+    color: var(--text-light);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    background: var(--navy-light);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: border-color 0.2s ease;
+  }
+  .card:hover { border-color: rgba(255,255,255,0.16); }
+  .card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+    color: var(--text-light);
+  }
+  .card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .event-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .event-row:last-child { border-bottom: none; }
+  .event-date {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    min-width: 130px;
+  }
+  .event-name { font-weight: 600; font-size: 1.05rem; }
+
+  #contact p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+  #contact a { color: var(--text-light); }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { gap: 18px; }
+    .nav-links a:not(.donate-btn) { display: none; }
+  }
+</style>
 </head>
 <body>
-  <nav>
-    <div class="logo">EAST ASTRO</div>
-    <div>
-      <a href="#about">About</a>
-      <a href="#events">Events</a>
-      <a href="#join">Join</a>
-    </div>
-  </nav>
 
-  <section class="hero">
-    <h1>Lincoln East<br>Astronomy Club</h1>
-    <p>Spartans looking up. Star parties, meetings, and events for anyone curious about what's out there.</p>
-    <a href="#join" class="cta">Join the Club</a>
-  </section>
+<nav>
+  <a href="#" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">LEAC</a>
+  <div class="nav-links">
+    <a href="#what-we-do">What We Do</a>
+    <a href="#events">Events</a>
+    <a href="#contact">Contact</a>
+    <a href="#donate" class="donate-btn">Donate</a>
+  </div>
+</nav>
 
-  <footer>
-    &copy; 2026 East Astro — Lincoln East High School
-  </footer>
-</body>
-</html>
-<section id="about" style="padding: 100px 24px; max-width: 700px; margin: 0 auto;">
-  <h2 style="font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 24px;">
-    Our Mission
-  </h2>
-  <p style="font-size: 1.15rem; line-height: 1.7; color: #c3cad9; margin-bottom: 48px;">
-    There isn't only a lack of youth interested in astronomy — there's a lack of outlets for youth to gain interest and engage with it. East Astro exists to close that gap.
-  </p>
+<section class="hero">
+  <canvas id="stars"></canvas>
+  <div class="hero-content">
+    <h1>An astronomy club for youth, by youth.</h1>
+    <p class="subtitle">Creating the next generation of scientists, engineers, and space enthusiasts.</p>
+  </div>
+</section>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-top: 48px;">
-    <div>
-      <h3 style="font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: #7a86a3; margin-bottom: 8px;">Meets</h3>
-      <p style="font-size: 1.1rem; color: #e8ecf1;">Biweekly, Wednesdays</p>
+<section class="content" id="what-we-do">
+  <h2>What We Do</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>🔭 Stargazing</h3>
+      <p>Night sky observation events where members explore the cosmos together.</p>
     </div>
-    <div>
-      <h3 style="font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: #7a86a3; margin-bottom: 8px;">Where</h3>
-      <p style="font-size: 1.1rem; color: #e8ecf1;">Room [fill in]</p>
+    <div class="card">
+      <h3>🚀 American Rocketry Challenge</h3>
+      <p>Designing, building, and flying competition rockets as a team.</p>
     </div>
-    <div>
-      <h3 style="font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: #7a86a3; margin-bottom: 8px;">Sponsors</h3>
-      <p style="font-size: 1.1rem; color: #e8ecf1;">[Sponsor names]</p>
+    <div class="card">
+      <h3>🏅 Science Olympiads</h3>
+      <p>Competing in national olympiad events centered on space and astronomy.</p>
+    </div>
+    <div class="card">
+      <h3>🧪 STEM Activities</h3>
+      <p>Hands-on projects and meetings exploring science, engineering, and space.</p>
     </div>
   </div>
-
-  <h3 style="font-size: 1.3rem; font-weight: 700; margin: 56px 0 20px;">What we do</h3>
-  <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
-    <li style="font-size: 1.05rem; color: #c3cad9;">🔭 Stargazing nights</li>
-    <li style="font-size: 1.05rem; color: #c3cad9;">🚀 American Rocketry Challenge</li>
-    <li style="font-size: 1.05rem; color: #c3cad9;">🏅 National science olympiads</li>
-    <li style="font-size: 1.05rem; color: #c3cad9;">🧪 STEM activities & projects</li>
-  </ul>
 </section>
+
+<section class="content" id="events">
+  <h2>Upcoming Events</h2>
+  <div class="event-row">
+    <span class="event-date">Wed, Sept 9</span>
+    <span class="event-name">General Meeting</span>
+  </div>
+  <div class="event-row">
+    <span class="event-date">Wed, Sept 23</span>
+    <span class="event-name">General Meeting</span>
+  </div>
+  <div class="event-row">
+    <span class="event-date">TBD</span>
+    <span class="event-name">Fall Stargazing Night</span>
+  </div>
+</section>
+
+<section class="content" id="contact">
+  <h2>Contact</h2>
+  <p>
+    LEAC meets biweekly on Wednesdays at Lincoln East High School.<br>
+    Questions? Reach out through our Google Classroom or talk to a club sponsor.<br>
+    <a href="mailto:leac@example.org">leac@example.org</a>
+  </p>
+</section>
+
+<section class="content" id="donate">
+  <h2>Support LEAC</h2>
+  <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 24px;">
+    Donations help fund rocketry materials, stargazing equipment, and competition fees.
+  </p>
+  <a href="#" class="donate-btn" style="display:inline-block; text-decoration:none;">Donate</a>
+</section>
+
+<footer>
+  LEAC — Lincoln East Astronomy Club
+</footer>
+
+<script>
+  // subtle starfield canvas behind hero
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const stars = Array.from({length: 140}, () => ({
+    x: Math.random(),
+    y: Math.random(),
+    r: Math.random() * 1.4 + 0.3,
+    o: Math.random() * 0.6 + 0.2,
+    tw: Math.random() * 0.02 + 0.005
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const s of stars) {
+      s.o += s.tw;
+      const alpha = 0.4 + Math.sin(s.o) * 0.35;
+      ctx.beginPath();
+      ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${Math.max(0, alpha)})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+</script>
+
+</body>
+</html>
