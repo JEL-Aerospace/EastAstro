@@ -3,16 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Keeps this page out of Google/Bing search results while still viewable by anyone with the direct link. Remove this line if/when you want the club to be publicly searchable. -->
+<meta name="robots" content="noindex, nofollow">
 <title>LEAC | Lincoln East Astronomy Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --navy: #0f1420;
     --navy-dark: #090c14;
     --navy-light: #161c2c;
     --border: rgba(255,255,255,0.07);
+    --divider: rgba(255,255,255,0.12);
     --text-light: #edeef2;
     --text-muted: #7b8497;
     --star: #ffffff;
+    --nav-h: 84px;
+    --mission-h: 126px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -26,14 +34,15 @@
   nav {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 150;
+    height: var(--nav-h);
     background: rgba(5, 7, 16, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 40px;
+    padding: 0 40px;
     border-bottom: 1px solid var(--border);
   }
   .logo {
@@ -57,7 +66,7 @@
     transition: color 0.15s ease;
   }
   .nav-links a:hover { color: var(--text-light); }
-  .donate-btn {
+  .cta-btn {
     background: var(--text-light);
     color: #050710 !important;
     padding: 8px 18px;
@@ -65,23 +74,25 @@
     font-weight: 600 !important;
     font-size: 0.9rem !important;
   }
-  .donate-btn:hover { opacity: 0.85; color: #050710 !important; }
+  .cta-btn:hover { opacity: 0.85; color: #050710 !important; }
 
-  /* ---- HERO with generated galaxy/starfield ---- */
+  /* ---- HERO (nebula photo + starfield + title) ---- */
   .hero {
     position: relative;
-    min-height: 88vh;
+    min-height: calc(100vh - var(--nav-h) - var(--mission-h));
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    text-align: center;
-    padding: 40px 24px;
+    text-align: left;
+    padding: 40px 56px;
     overflow: hidden;
-    background:
-      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(90, 110, 200, 0.14), transparent 65%),
-      radial-gradient(ellipse 50% 35% at 20% 100%, rgba(70, 90, 170, 0.08), transparent 60%),
-      linear-gradient(180deg, #050710 0%, #060811 50%, #050710 100%);
+    background-image:
+      linear-gradient(180deg, rgba(5,7,16,0.55) 0%, rgba(5,7,16,0.68) 55%, rgba(5,7,16,0.92) 100%),
+      url('https://science.nasa.gov/wp-content/uploads/2023/04/hs-2015-29-a-xlarge_web-jpg.webp');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
   }
   .hero canvas {
     position: absolute;
@@ -92,26 +103,63 @@
     position: relative;
     z-index: 2;
   }
-  .hero h1 {
-    font-size: clamp(2.2rem, 6vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -1px;
-    line-height: 1.15;
-    max-width: 800px;
+  .hero-credit {
+    position: absolute;
+    bottom: 14px;
+    right: 20px;
+    z-index: 2;
+    font-size: 0.7rem;
+    color: rgba(237,238,242,0.45);
+    letter-spacing: 0.2px;
   }
-  .hero .subtitle {
-    margin-top: 20px;
-    font-size: clamp(1rem, 2.2vw, 1.25rem);
-    color: var(--text-muted);
-    max-width: 560px;
-    line-height: 1.6;
+  .hero-credit a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .hero-credit a:hover { color: rgba(237,238,242,0.75); }
+  .hero h1 {
+    font-size: clamp(2.2rem, 5.5vw, 4.4rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    max-width: 900px;
+    text-align: left;
+  }
+
+  /* ---- MISSION BAR (separate navy section, no starfield) ---- */
+  .mission {
+    position: relative;
+    margin-top: -2px;
+    min-height: var(--mission-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--navy);
+    padding: 20px 24px;
+  }
+  .mission p {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+    color: #ffffff;
+    max-width: 720px;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  /* ---- DIVIDERS ---- */
+  .section-divider {
+    max-width: 880px;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--divider);
   }
 
   /* ---- SECTIONS ---- */
   section.content {
     max-width: 880px;
     margin: 0 auto;
-    padding: 90px 24px;
+    padding: 64px 24px;
   }
   section.content h2 {
     font-size: clamp(1.6rem, 4vw, 2.2rem);
@@ -120,6 +168,15 @@
     margin-bottom: 36px;
     color: var(--text-light);
   }
+  .subhead {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+  }
+  .subhead-spaced { margin-top: 48px; }
 
   .cards {
     display: grid;
@@ -179,7 +236,9 @@
 
   @media (max-width: 640px) {
     .nav-links { gap: 18px; }
-    .nav-links a:not(.donate-btn) { display: none; }
+    .nav-links a:not(.cta-btn) { display: none; }
+    .hero { padding: 40px 24px; }
+    .mission { padding: 20px 20px; }
   }
 </style>
 </head>
@@ -191,39 +250,64 @@
     <a href="#what-we-do">What We Do</a>
     <a href="#events">Events</a>
     <a href="#contact">Contact</a>
-    <a href="#donate" class="donate-btn">Donate</a>
+    <!-- Donate link disabled until club fundraising is approved by the school. Re-enable alongside the #donate section below. -->
+    <!-- <a href="#donate" class="cta-btn">Donate</a> -->
+    <a href="#contact" class="cta-btn">Join</a>
   </div>
 </nav>
 
 <section class="hero">
   <canvas id="stars"></canvas>
   <div class="hero-content">
-    <h1>An astronomy club for youth, by youth.</h1>
-    <p class="subtitle">Creating the next generation of scientists, engineers, and space enthusiasts.</p>
+    <h1>An astronomy club run by youth,</h1>
+    <h1>for youth.</h1>
   </div>
+  <p class="hero-credit">Veil Nebula — <a href="https://science.nasa.gov/image-detail/hs-2015-29-a-xlarge_web/" target="_blank" rel="noopener">NASA/ESA/Hubble Heritage Team</a></p>
 </section>
+
+<div class="mission">
+  <p>Inspiring the next generation of scientists, engineers, and space enthusiasts.</p>
+</div>
+
+<div class="section-divider"></div>
 
 <section class="content" id="what-we-do">
   <h2>What We Do</h2>
+
+  <h3 class="subhead">Currently</h3>
   <div class="cards">
     <div class="card">
-      <h3>🔭 Stargazing</h3>
-      <p>Night sky observation events where members explore the cosmos together.</p>
+      <h3>🧪 Hands-On Meetings</h3>
+      <p>We meet biweekly to build and explore together — our last meeting was a straw rocket build.</p>
     </div>
+    <div class="card">
+      <h3>🤝 A New Club, Finding Its Footing</h3>
+      <p>LEAC is just getting started, run by two teacher sponsors and shaped by whatever members want to explore next.</p>
+    </div>
+  </div>
+
+  <h3 class="subhead subhead-spaced">Looking Ahead</h3>
+  <div class="cards">
     <div class="card">
       <h3>🚀 American Rocketry Challenge</h3>
-      <p>Designing, building, and flying competition rockets as a team.</p>
+      <p>We're hoping to put together a team to design, build, and fly competition rockets.</p>
     </div>
     <div class="card">
-      <h3>🏅 Science Olympiads</h3>
-      <p>Competing in national olympiad events centered on space and astronomy.</p>
+      <h3>🏅 Science Olympiad</h3>
+      <p>Interested in competing in national olympiad events centered on space and astronomy.</p>
     </div>
     <div class="card">
-      <h3>🧪 STEM Activities</h3>
-      <p>Hands-on projects and meetings exploring science, engineering, and space.</p>
+      <h3>🌌 Astronomy Olympiad (USAAAO)</h3>
+      <p>Working on getting proctoring set up so members can take the exam.</p>
+    </div>
+    <div class="card">
+      <h3>🔭 Stargazing Nights</h3>
+      <p>Planning our first night sky observation event once we lock down logistics.</p>
     </div>
   </div>
 </section>
+
+<div class="section-divider"></div>
 
 <section class="content" id="events">
   <h2>Upcoming Events</h2>
@@ -235,35 +319,43 @@
     <span class="event-date">Wed, Sept 23</span>
     <span class="event-name">General Meeting</span>
   </div>
-  <div class="event-row">
-    <span class="event-date">TBD</span>
-    <span class="event-name">Fall Stargazing Night</span>
-  </div>
 </section>
 
+<div class="section-divider"></div>
+
 <section class="content" id="contact">
-  <h2>Contact</h2>
+  <h2>Contact &amp; Join</h2>
   <p>
-    LEAC meets biweekly on Wednesdays at Lincoln East High School.<br>
-    Questions? Reach out through our Google Classroom or talk to a club sponsor.<br>
-    <a href="mailto:leac@example.org">leac@example.org</a>
+    LEAC is a student club at Lincoln East High School, sponsored by two teachers, meeting biweekly on Wednesdays.<br>
+    Email: <a href="mailto:eastastroclub@gmail.com">eastastroclub@gmail.com</a><br>
+    Google Classroom code: <strong>pqnjnsuq</strong> (school accounts only)<br>
+    Prospective members or parents: reach out to us directly at the email above.
   </p>
 </section>
+
+<!--
+  Donate section — disabled for now. LEAC is a school club and hasn't confirmed
+  whether independent fundraising/donations are permitted under school policy.
+  Once that's cleared, delete this comment wrapper (and the matching one in the
+  <style> block isn't needed — .cta-btn styling was left in place) to restore.
+
+<div class="section-divider"></div>
 
 <section class="content" id="donate">
   <h2>Support LEAC</h2>
   <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 24px;">
     Donations help fund rocketry materials, stargazing equipment, and competition fees.
   </p>
-  <a href="#" class="donate-btn" style="display:inline-block; text-decoration:none;">Donate</a>
+  <a href="#" class="cta-btn" style="display:inline-block; text-decoration:none;">Donate</a>
 </section>
+-->
 
 <footer>
   LEAC — Lincoln East Astronomy Club
 </footer>
 
 <script>
-  // subtle starfield canvas behind hero
+  // subtle starfield canvas behind hero title
   const canvas = document.getElementById('stars');
   const ctx = canvas.getContext('2d');
   function resize() {
